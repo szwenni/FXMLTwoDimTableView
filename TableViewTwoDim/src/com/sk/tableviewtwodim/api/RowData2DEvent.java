@@ -1,4 +1,4 @@
-package com.sk.tableviewtwodim;
+package com.sk.tableviewtwodim.api;
 
 import java.util.List;
 
@@ -18,5 +18,13 @@ public class RowData2DEvent<T> extends Event {
 		super(EventType.ROOT);
 		this.rowName = rowName;
 		this.data = data;
+	}
+
+	public List<String> getRowData() {
+		return data;
+	}
+
+	public String getName() {
+		return rowName;
 	}
 }

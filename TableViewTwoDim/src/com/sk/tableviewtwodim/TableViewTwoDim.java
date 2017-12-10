@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
+import com.sk.tableviewtwodim.api.ColumnData2DEvent;
+import com.sk.tableviewtwodim.api.RowData2DEvent;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -22,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
-public class TableView2D<T> extends AnchorPane {
+public class TableViewTwoDim<T> extends AnchorPane {
 
 	@FXML
 	private TableView<T> table;
@@ -42,11 +45,11 @@ public class TableView2D<T> extends AnchorPane {
 
 	private HashMap<T, String> rowItemMatcher = new HashMap<>();
 
-	public TableView2D(String name) throws IOException {
+	public TableViewTwoDim() throws IOException {
 		final FXMLLoader loader = new FXMLLoader();
 		loader.setRoot(this);
 		loader.setController(this);
-		loader.setLocation(this.getClass().getResource("TableViewTwoDim.fxml"));
+		loader.setLocation(this.getClass().getResource("TableViewTwoDim_View.fxml"));
 
 		loader.load();
 	}
