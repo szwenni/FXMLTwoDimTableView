@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
+import com.sk.tableviewtwodim.api.Cell2D;
 import com.sk.tableviewtwodim.api.ColumnData2DEvent;
 import com.sk.tableviewtwodim.api.RowData2DEvent;
 
@@ -62,7 +63,21 @@ public class TableViewTwoDim<T> extends AnchorPane {
 		setRowHeaderValueFactory();
 	}
 
+	public void setRowHeader(List<String> columnHeader) {
+		this.columnHeader = columnHeader;
+	}
+
+	public List<String> getRowHeader() {
+		return rowHeader;
+	}
+
+	public List<String> getColumnHeader() {
+		return columnHeader;
+	}
+
 	public void setItems() {
+		table.getItems().clear();
+		table.getColumns().clear();
 		for (String col : columnHeader) {
 			TableColumn<T, String> column = new TableColumn<>();
 			makeHeader(column, col, 0);
@@ -81,14 +96,15 @@ public class TableViewTwoDim<T> extends AnchorPane {
 		this.matcher = matcher;
 	}
 
-	public void setItemValueFactoryForColumn(String column, Function<T, String> valueSelector) {
+	public void setItemValueFactoryForColumn(String column, Function<Cell2D<T>, String> valueSelector) {
 		columns.get(column)
 				.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<T, String>, ObservableValue<String>>() {
 
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<T, String> param) {
 						// TODO Auto-generated method stub
-						return new SimpleStringProperty(valueSelector.apply(param.getValue()));
+						Cell2D<T> cell = new Cell2D<>(param.getValue(), rowItemMatcher.get(param.getValue()), column);
+						return new SimpleStringProperty(valueSelector.apply(cell));
 					}
 				});
 	}

@@ -18,7 +18,7 @@ public class ColumnData2DEvent<T> extends Event {
 		this.data = data;
 	}
 
-	public List<String> getRowData() {
+	public List<String> getColData() {
 		return data;
 	}
 
